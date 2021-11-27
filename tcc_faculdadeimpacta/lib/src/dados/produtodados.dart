@@ -1,5 +1,5 @@
 //classe que vai passar de forma momentanea os dados
-import 'package:tcc_faculdadeimpacta/src/models/ProdotutosModel.dart';
+import 'package:tcc_faculdadeimpacta/src/models/prodotutosModel.dart';
 import 'package:tcc_faculdadeimpacta/src/dados/produtodados.dart';
 
 class ProdutosDados{

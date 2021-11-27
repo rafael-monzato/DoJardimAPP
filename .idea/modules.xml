@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/TCC-IMPACTA.iml" filepath="$PROJECT_DIR$/.idea/TCC-IMPACTA.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tcc_faculdadeimpacta/.idea/TCC-IMPACTA.iml" filepath="$PROJECT_DIR$/tcc_faculdadeimpacta/.idea/TCC-IMPACTA.iml" />
     </modules>
   </component>
 </project>

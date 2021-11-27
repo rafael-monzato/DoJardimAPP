@@ -1,6 +1,6 @@
  import 'package:flutter/material.dart';
 import 'package:tcc_faculdadeimpacta/src/abas/tabs1.dart';
- import 'pages/TelaInicial.dart';
+ import 'pages/telaInicial.dart';
 
  class App extends StatelessWidget{
    @override

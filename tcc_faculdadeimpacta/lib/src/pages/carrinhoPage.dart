@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tcc_faculdadeimpacta/src/pages/LoginPage.dart';
-import 'package:tcc_faculdadeimpacta/src/src.componentes/CardCarrinho.dart';
+import 'package:tcc_faculdadeimpacta/src/pages/loginPage.dart';
+import 'package:tcc_faculdadeimpacta/src/src.componentes/cardCarrinho.dart';
 import 'package:tcc_faculdadeimpacta/src/src.componentes/botao.dart';
 
 class carrinhoPage extends StatefulWidget{

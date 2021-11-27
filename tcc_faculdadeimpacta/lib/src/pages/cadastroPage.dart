@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tcc_faculdadeimpacta/src/src.componentes/botao.dart';
-import 'package:tcc_faculdadeimpacta/src/pages/LoginPage.dart';
+import 'package:tcc_faculdadeimpacta/src/pages/loginPage.dart';
 
 class cadastroPage extends StatefulWidget {
   @override

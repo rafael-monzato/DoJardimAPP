@@ -2,7 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tcc_faculdadeimpacta/src/models/ProdotutosModel.dart';
-import 'package:tcc_faculdadeimpacta/src/src.componentes/CardProdutos.dart';
+import 'package:tcc_faculdadeimpacta/src/src.componentes/cardProdutos.dart';
 import 'package:tcc_faculdadeimpacta/src/src.componentes/buscar.dart';
 import 'package:tcc_faculdadeimpacta/src/src.componentes/cabecalho.dart';
 import 'package:tcc_faculdadeimpacta/src/src.componentes/categorias.dart';

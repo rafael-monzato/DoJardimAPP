@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tcc_faculdadeimpacta/src/pages/TelaInicial.dart';
-import 'package:tcc_faculdadeimpacta/src/pages/TelaInicial.dart';
+import 'package:tcc_faculdadeimpacta/src/pages/telaInicial.dart';
+import 'package:tcc_faculdadeimpacta/src/pages/telaInicial.dart';
 import 'package:tcc_faculdadeimpacta/src/pages/carrinhoPage.dart';
 import 'package:tcc_faculdadeimpacta/src/pages/categoriasPage.dart';
 import 'package:tcc_faculdadeimpacta/src/pages/categoriasPage.dart';
