@@ -8,9 +8,9 @@ class Buscar extends StatelessWidget {
       elevation: 2.0,
       child: TextField(
           style: TextStyle(color: Colors.grey, fontSize: 15.0),
-          cursorColor: Theme.of(context).primaryColor,
+          cursorColor: Theme.of(context).primaryColorLight,
           decoration: InputDecoration(
-              contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+              contentPadding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               suffixIcon: IconButton(
                   color: Color(0xFFFF005C),
                   disabledColor: Colors.green[100],
@@ -18,7 +18,7 @@ class Buscar extends StatelessWidget {
                   icon: Icon(Icons.search),
                   ),
               border:OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(5))
+                borderRadius: BorderRadius.all(Radius.circular(5)),
               ),
               hintText: "Buscar Produtos"
           )
