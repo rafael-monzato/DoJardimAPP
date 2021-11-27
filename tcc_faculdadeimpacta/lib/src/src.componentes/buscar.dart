@@ -10,7 +10,7 @@ class Buscar extends StatelessWidget {
           style: TextStyle(color: Colors.grey, fontSize: 15.0),
           cursorColor: Theme.of(context).primaryColor,
           decoration: InputDecoration(
-              contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 16.0),
+              contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
               suffixIcon: IconButton(
                   color: Color(0xFFFF005C),
                   disabledColor: Colors.green[100],
