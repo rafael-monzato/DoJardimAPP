@@ -1,4 +1,4 @@
-//Onde vai ter os cards da tela incicial
+//Onde vai ter os cards da tela inicial
 
 import 'package:flutter/material.dart';
 import 'package:tcc_faculdadeimpacta/src/dados/categoriasDados.dart';
@@ -11,8 +11,8 @@ class AreaCategoria extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return Container(
-      height:80.0, //definiçãodasmedidasdocard
-      margin: EdgeInsets.only(top:10.0),
+      height:100.0, //definiçãodasmedidasdocard
+      margin: EdgeInsets.only(top:10.0, bottom: 16.0),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,//direcionamentodocard
         itemCount: _categorias.length, //pegarnobancodedadosotamanhodacategoria // SO A CATEGORIA

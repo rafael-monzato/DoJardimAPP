@@ -5,20 +5,19 @@ class Buscar extends StatelessWidget {
   @override
   Widget build(BuildContext context){
     return Material(
-      elevation: 5.0,
+      elevation: 2.0,
       child: TextField(
-          style: TextStyle(color: Colors.grey, fontSize: 18.0),
+          style: TextStyle(color: Colors.grey, fontSize: 15.0),
           cursorColor: Theme.of(context).primaryColor,
           decoration: InputDecoration(
-              contentPadding: EdgeInsets.symmetric(horizontal: 32.0, vertical: 14.0),
+              contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 16.0),
               suffixIcon: Material(
-                  elevation: 2.0,
                   child: Icon(
                     Icons.search,
                     color: Color(0xFFFF005C),
+                    size: 24.0,
                   )
               ),
-              border:InputBorder.none,
               hintText: "Buscar Produtos"
           )
 

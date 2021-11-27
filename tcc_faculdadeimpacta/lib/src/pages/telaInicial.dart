@@ -22,7 +22,7 @@ class TelaInicial extends StatefulWidget{ //'#criarclasseparamudarnoapp'
  Widget build(BuildContext context) {
    return Scaffold(
      body: ListView(
-       padding:EdgeInsets.only(left:20.0,top:30.0,right:20.00),
+       padding:EdgeInsets.only(left:16.0,top:20.0,right:16.00),
          children:<Widget>[
            //Cabecalho(),
            AreaCategoria(),
@@ -42,14 +42,14 @@ class TelaInicial extends StatefulWidget{ //'#criarclasseparamudarnoapp'
                ),
                GestureDetector(
                  onTap: () {
-                   print("Precionou' pressed");
+                   print("Pressionou' pressed");
                  },
                  child: Text(
                    "Ver Todos",
                    style: TextStyle(
                      color: Color(0xFFFF005C),
                      fontWeight: FontWeight.bold,
-                     fontSize: 16.0,
+                     fontSize: 12.0,
                    ),
                  )
                )
