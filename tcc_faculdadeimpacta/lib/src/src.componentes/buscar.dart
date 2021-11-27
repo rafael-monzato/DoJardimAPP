@@ -11,12 +11,14 @@ class Buscar extends StatelessWidget {
           cursorColor: Theme.of(context).primaryColor,
           decoration: InputDecoration(
               contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 16.0),
-              suffixIcon: Material(
-                  child: Icon(
-                    Icons.search,
-                    color: Color(0xFFFF005C),
-                    size: 24.0,
-                  )
+              suffixIcon: IconButton(
+                  color: Color(0xFFFF005C),
+                  disabledColor: Colors.green[100],
+                  onPressed: () {  },
+                  icon: Icon(Icons.search),
+                  ),
+              border:OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5))
               ),
               hintText: "Buscar Produtos"
           )
