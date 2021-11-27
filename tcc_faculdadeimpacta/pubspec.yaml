@@ -30,8 +30,14 @@ dependencies:
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
+  flutter_native_splash: ^1.3.1
   flutter_test:
     sdk: flutter
+
+flutter_native_splash:
+  color: "#242C33"
+  image: assets/imagens/splash.png
+  android: true
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -63,6 +69,7 @@ flutter:
     - assets/imagens/Rectangle3292rosa.png
     - assets/imagens/logo.png
     - assets/imagens/LOGOSITE.png
+    - assets/imagens/splash.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
