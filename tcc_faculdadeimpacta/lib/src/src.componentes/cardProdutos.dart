@@ -26,19 +26,19 @@ class CardProdutos extends StatefulWidget {
 }
 
 class _CardProdutosState extends State<CardProdutos> {
-  var cardText = TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold);
+  var cardText = TextStyle(fontSize: 16.0, fontWeight: FontWeight.w600);
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.all(
-        Radius.circular(10.0),
+        Radius.circular(5.0),
       ),
       child: Stack(
         children: <Widget>[
           Container(
             height: 230.0,
-            width: 340.0,
+            margin: EdgeInsets.only(left: 0.0, right:0.0),
             child: Image(
               image: AssetImage(
                   widget.imagem
@@ -47,16 +47,16 @@ class _CardProdutosState extends State<CardProdutos> {
             ),
           ),
           Positioned(
-            left: 10.0,
+            left: 0.0,
             bottom: 0.0,
-            width: 339.0,
-            height: 48.0,
+            height: 60.0,
+            width: 800.0,
             child: Container(
               decoration: BoxDecoration(
                   gradient: LinearGradient(
                       begin: Alignment.bottomCenter,
                       end: Alignment.topCenter,
-                      colors: [Colors.black54, Colors.black12])),
+                      colors: [Colors.black87, Colors.black12])),
             ),
           ),
           Positioned(
@@ -78,37 +78,8 @@ class _CardProdutosState extends State<CardProdutos> {
                     ),
                     Row(
                       children: <Widget>[
-                        Icon(
-                          Icons.star,
-                          color: Theme.of(context).primaryColorLight,
-                          size: 16.0,
-                        ),
-                        Icon(
-                          Icons.star,
-                          color: Theme.of(context).primaryColor,
-                          size: 16.0,
-                        ),
-                        Icon(
-                          Icons.star,
-                          color: Theme.of(context).primaryColor,
-                          size: 16.0,
-                        ),
-                        Icon(
-                          Icons.star,
-                          color: Theme.of(context).primaryColor,
-                          size: 16.0,
-                        ),
-                        Icon(
-                          Icons.star,
-                          color: Theme.of(context).primaryColor,
-                          size: 16.0,
-                        ),
                         SizedBox(
                           width: 10.0,
-                        ),
-                        Text(
-                          "(" + widget.avaliacoes.toString() + " Avaliação)",
-                          style: TextStyle(color: Colors.grey),
                         ),
                       ],
                     ),
@@ -121,10 +92,10 @@ class _CardProdutosState extends State<CardProdutos> {
                       widget.valor.toString(),
                       style: TextStyle(
                           fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w500,
                           color: Color(0xFFFFFFFF)),
                     ),
-                    Text("(Dúzia)",
+                    Text("(Unidade)",
                         style: TextStyle(color: Color(0xFFFFFFFF)))
                   ],
                 ),
