@@ -16,8 +16,8 @@ class Tabs extends StatefulWidget{
 class _TabsState extends State<Tabs> {
   final List<Widget> pages = [
     TelaInicial(),
-    produtosPage(),
     categoriasPage(),
+    produtosPage(),
     carrinhoPage(),
   ];
   @override
@@ -47,8 +47,8 @@ class _TabsState extends State<Tabs> {
            backgroundColor: Color(0xFFFF005C),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.agriculture_outlined),
-            title: Text('Produtores'),
+            icon: Icon(Icons.list),
+            title: Text('Categorias'),
             backgroundColor: Color(0xFFFF005C),
           ),
           BottomNavigationBarItem(
