@@ -22,6 +22,16 @@ class _categoriasPageState extends State<categoriasPage>{
             SizedBox(
               height: 20.0,
             ),
+            Text(
+              "Categorias",
+              style: TextStyle(
+                fontSize: 16.0,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
