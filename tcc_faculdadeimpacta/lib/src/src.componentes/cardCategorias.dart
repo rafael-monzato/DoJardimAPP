@@ -11,29 +11,25 @@ class CardCategorias extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return Container(
-     margin: EdgeInsets.only(right: 20),
-     child: Card(
+     margin: EdgeInsets.only(right: 16),
+     //child: Card(
        child: Padding(
-         padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-         child: Row(
-           children:<Widget>[
-             Image(
-               image:AssetImage(imgCat),
-               height: 65.0, //alturadocard
-               width: 65.0,
-             ),
-             SizedBox(width: 20.0,),
-             Column(
+         padding: EdgeInsets.only(left: 8.0),
+         child:Column(
                mainAxisAlignment: MainAxisAlignment.center,
                children: <Widget>[
-                 Text(nomeCat, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0)), //criarfontcomstiloarrumarcod
-                 Text("$totalProd Produtos", style: TextStyle( fontSize: 14.0)),
+                 Image(
+                   image:AssetImage(imgCat),
+                   height: 67.0,
+                   width: 67.0,
+                 ),
+                 SizedBox(height: 8.0,),
+                 Text(nomeCat, style: TextStyle(fontWeight: FontWeight.w500, fontSize: 12.0)), //criarfontcomstiloarrumarcod
                ],
              )
-           ],
          ),
-       ),
-     ),
-    );
+       );
+     //);
+    //);
   }
 }
