@@ -9,7 +9,7 @@ import 'package:tcc_faculdadeimpacta/src/abas/tabs1.dart';
      return MaterialApp(
        title: "DoJardim",
        theme: ThemeData(primaryColor: Colors.blueGrey), //'#mudaracor',
-       home: Tabs(),
+       home: Tabs('','',''),
 
      );
    }

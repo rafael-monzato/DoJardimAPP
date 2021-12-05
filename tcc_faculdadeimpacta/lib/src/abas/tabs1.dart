@@ -9,6 +9,9 @@ import 'package:tcc_faculdadeimpacta/src/pages/produtosPage.dart';
 
 
 class Tabs extends StatefulWidget{
+  Tabs(cpf, nome, id);
+
+
   @override
   _TabsState createState() => _TabsState();
 }
@@ -16,7 +19,7 @@ class Tabs extends StatefulWidget{
 class _TabsState extends State<Tabs> {
   final List<Widget> pages = [
     TelaInicial(),
-    produtosPage(),
+    produtosPage('',''),
     categoriasPage(),
     carrinhoPage(),
   ];

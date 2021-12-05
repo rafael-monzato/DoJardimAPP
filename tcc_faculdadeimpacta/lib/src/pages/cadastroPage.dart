@@ -1,8 +1,19 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:tcc_faculdadeimpacta/src/src.componentes/botao.dart';
 import 'package:tcc_faculdadeimpacta/src/pages/loginPage.dart';
+import 'package:tcc_faculdadeimpacta/src/abas/tabs1.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class cadastroPage extends StatefulWidget {
+  var _id;
+
+  cadastroPage(id) {
+
+    this._id = id;
+  }
   @override
   _cadastroPageState createState() => _cadastroPageState();
 }
@@ -13,9 +24,15 @@ class _cadastroPageState extends State<cadastroPage> {
   late String _email;
   late String _nome;
   late String _senha;
-  late String _telefone;
   late String _cpf;
-  // String _confirmPassword;
+  late String _telefone;
+
+  var nome, cpf, telefone, usuario, senha;
+  var nometxt, emailtxt, senhatxt, cpftxt, telefonetxt;
+  var dados;
+  var caminhoImg = "assets/imagens/cadastro.png";
+  var nomebtn = "Inserir";
+
 
   GlobalKey<FormState> _formKey = GlobalKey();
 
@@ -53,7 +70,7 @@ class _cadastroPageState extends State<cadastroPage> {
         hintText: "Nome completo",
         hintStyle: TextStyle(
           color: Color(0xFF999999),
-          fontSize: 14.0,
+       fontSize: 14.0,
         ),
       ),
       onSaved: (username) {
@@ -72,7 +89,7 @@ class _cadastroPageState extends State<cadastroPage> {
     );
   }
 
-  Widget _telefoneInt() {
+  Widget _telefonetxt() {
     return TextFormField(
       keyboardType: TextInputType.number,
       decoration: InputDecoration(
@@ -99,7 +116,7 @@ class _cadastroPageState extends State<cadastroPage> {
     );
   }
 
-  Widget _cpfInt() {
+  Widget _cpftxt() {
     return TextFormField(
       keyboardType: TextInputType.number,
       decoration: InputDecoration(
@@ -160,6 +177,143 @@ class _cadastroPageState extends State<cadastroPage> {
     );
   }
 
+  mensagem(res){
+    var alert = new AlertDialog(
+      title: new Text('Inserir Dados'),
+      content: new SingleChildScrollView(
+        child: new ListBody(
+          children: <Widget>[
+            new Text(res),
+          ],
+        ),
+      ),
+      actions: <Widget>[
+        new FlatButton(
+          child: new Text('Ok'),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ],
+    );
+    showDialog(context: context, child: alert);
+
+    if(res == 'Inserido com Sucesso'){
+      nometxt.text = "";
+      telefonetxt.text = "";
+      emailtxt.text = "";
+      senhatxt.text = "";
+      cpftxt.text = "";
+    }
+
+  }
+
+
+  //VERIFICAR SE O USUÁRIO ESTÁ LOGADO, SE TIVER RECUPERAR SEUS DADOS PARA EDITAR
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    if(widget._id != ""){
+      caminhoImg = "assets/imagens/excluir.png";
+      nomebtn = "Editar";
+      recuperarDados();
+    }
+    nometxt = new TextEditingController();
+    emailtxt = new TextEditingController();
+    senhatxt = new TextEditingController();
+    cpftxt = new TextEditingController();
+    telefonetxt = new TextEditingController();
+  }
+
+  //método para recuperar os dados do usuário logado
+  recuperarDados() async{
+
+    var response = await http.get(
+        Uri.encodeFull(
+            ""),
+        headers: {"Accept": "application/json"});
+    final map = json.decode(response.body);
+    final itens = map["result"];
+
+    setState(() {
+
+      this.dados = itens;
+
+      nome = dados[0]["nome"];
+      cpf = dados[0]["cpf"];
+      telefone = dados[0]["telefone"];
+      usuario = dados[0]["usuario"];
+      senha = dados[0]["senha"];
+
+
+      nometxt = new TextEditingController(text: nome);
+      emailtxt = new TextEditingController(text: usuario);
+      senhatxt = new TextEditingController(text: senha);
+      cpftxt = new TextEditingController(text: cpf);
+      telefonetxt = new TextEditingController(text: telefone);
+    });
+
+
+
+  }
+
+  //método para inserir na api
+  void _inserir() async{
+    var url = "";
+    var response = await http.post(url, body:{
+      "nome" : nometxt.text,
+      "email" : emailtxt.text,
+      "cpf" : cpftxt.text,
+      "telefone" : telefonetxt.text,
+      "senha" : senhatxt.text,
+      "id" : widget._id,
+
+    });
+
+    final map = json.decode(response.body);
+    final res = map["message"];
+    print(res);
+    mensagem(res);
+  }
+
+  mensagemExcluir(){
+    var alert = new AlertDialog(
+      title: new Text('Excluir Usuário'),
+      content: new SingleChildScrollView(
+        child: new ListBody(
+          children: <Widget>[
+            new Text("Deseja Realmente Excluir o Usuário"),
+          ],
+        ),
+      ),
+      actions: <Widget>[
+        new TextButton (
+          child: new Text('Sim'),
+          onPressed: () {
+            excluirUsuario(widget._id);
+          },
+        ),
+        new TextButton(
+          child: new Text('Não'),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ],
+    );
+    showDialog(context: context, child: alert);
+  }
+
+  excluirUsuario(id){
+    http.get(
+        Uri.encodeFull(
+            ""),
+        headers: {"Accept": "application/json"});
+    Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => Tabs("", "", "")
+    ));
+  }
+
 
 
   @override
@@ -193,11 +347,11 @@ class _cadastroPageState extends State<cadastroPage> {
                     SizedBox(
                       height: 20.0,
                     ),
-                    _telefoneInt(),
+                    _telefonetxt(),
                     SizedBox(
                       height: 20.0,
                     ),
-                    _cpfInt(),
+                    _cpftxt(),
                     SizedBox(
                       height: 20.0,
                     ),

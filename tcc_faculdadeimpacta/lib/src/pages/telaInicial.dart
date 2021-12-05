@@ -1,7 +1,6 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tcc_faculdadeimpacta/src/models/ProdotutosModel.dart';
 import 'package:tcc_faculdadeimpacta/src/src.componentes/cardProdutos.dart';
 import 'package:tcc_faculdadeimpacta/src/src.componentes/buscar.dart';
 import 'package:tcc_faculdadeimpacta/src/src.componentes/cabecalho.dart';
@@ -17,7 +16,6 @@ class TelaInicial extends StatefulWidget{ //'#criarclasseparamudarnoapp'
 
  class _TelaInicialState extends State<TelaInicial>{
 
-  List<ProdutosModel> _produtos = produtos;
   @override
  Widget build(BuildContext context) {
    return Scaffold(
@@ -57,9 +55,12 @@ class TelaInicial extends StatefulWidget{ //'#criarclasseparamudarnoapp'
              ),
             SizedBox(height: 20.0),
             Column(
-              children: _produtos.map(_produtosItens).toList(),
+              children: <Widget>[
+                CardProdutos()
+              ],
             )
-            ])
+            ],
+     )
 
            //ondechamaparaaparecernatelaincial
    );

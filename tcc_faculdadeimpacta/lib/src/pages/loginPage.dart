@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tcc_faculdadeimpacta/src/src.componentes/botao.dart';
 import 'package:tcc_faculdadeimpacta/src/pages/cadastroPage.dart';
+import 'package:tcc_faculdadeimpacta/src/abas/tabs1.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class LoginPage extends StatefulWidget {
   @override
@@ -10,8 +13,15 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   bool _toggleVisibility = true;
 
+  var emailtxt = new TextEditingController();
+  var senhatxt = new TextEditingController();
+
+  var dados;
+  var seguro = true;
+
   Widget _emailtxt() {
-    return TextField(
+    return TextFormField(
+      controller: emailtxt,
       decoration: InputDecoration(
         hintText: "Digite seu email",
         border: OutlineInputBorder(),
@@ -24,7 +34,8 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _senhatxt() {
-    return TextField(
+    return TextFormField(
+      controller: senhatxt,
       decoration: InputDecoration(
         hintText: "Digite sua senha",
         border: OutlineInputBorder(),
@@ -49,6 +60,52 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    //MENSAGEM DADOS INCORRETOS
+    void MensagemDadosIncorretos() {
+      var alert = new AlertDialog(
+        title: new Text("Dados Incorretos"),
+        content: new Text(
+            "Usuário ou Senha incorretos"),
+      );
+      showDialog(context: context, child: alert);
+    }
+
+    //FUNCAO DO LOGIN
+    Future<String> Login(String usuario, String senha) async {
+      var response = await http.get(
+          Uri.encodeFull(
+              ""),
+          headers: {"Accept": "application/json"});
+
+
+      var obj = json.decode(response.body);
+      var msg = obj["message"];
+      if(msg == "Dados incorretos!"){
+        MensagemDadosIncorretos();
+      }else{
+        dados = obj['result'];
+      }
+
+    }
+
+    //VERIFICAR DADOS
+
+    VerificarDados(String usuario, String senha) {
+      if (dados[0]['usuario'] == usuario && dados[0]['senha'] == senha) {
+
+        var route = new MaterialPageRoute(
+          builder: (BuildContext context) =>
+          new Tabs(dados[0]['cpf'], dados[0]['nome'], dados[0]['id']),
+        );
+        Navigator.of(context).push(route);
+      } else {
+        MensagemDadosIncorretos();
+      }
+
+    }
+
+
+
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.0),

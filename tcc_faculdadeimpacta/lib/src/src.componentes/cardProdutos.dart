@@ -1,32 +1,89 @@
 //Produtos destacados da home page
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:tcc_faculdadeimpacta/src/abas/tabs1.dart';
 
-class CardProdutos extends StatefulWidget {
+class CardProduto extends StatefulWidget {
+  var _altura, _largura, _nomebusca, _idcat;
 
-  final String id;
-  final String nome;
-  final String imagem;
-  final String categoria;
-  final double valor;
-  final double desconto;
-  final double avaliacoes;
-
-  CardProdutos({
-    required this.id,
-    required this.nome,
-    required this.imagem,
-    required this.categoria,
-    required this.valor,
-    required this.desconto,
-    required this.avaliacoes});
-
+  CardProduto(altura, largura, nomebusca, idcat) {
+    this._altura = altura;
+    this._largura = largura;
+    this._nomebusca = nomebusca;
+    this._idcat = idcat;
+  }
   @override
-  _CardProdutosState createState() => _CardProdutosState();
+  _CardProdutoState createState() => _CardProdutoState();
+
 }
 
-class _CardProdutosState extends State<CardProdutos> {
+class _CardProdutoState extends State<CardProduto> {
   var cardText = TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold);
+
+  var carregando = false;
+  var dados;
+  var nome, imagem, valor;
+  var buscar;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _listarDados();
+
+  }
+
+  _listarDados() async{
+    buscar = widget._nomebusca;
+
+    var response = await http.get(
+        Uri.encodeFull(
+            ""),
+        headers: {"Accept": "application/json"});
+    final map = json.decode(response.body);
+    final itens = map["result"];
+    if(map["result"] == 'Dados não encontrados!'){
+      mensagem();
+    }else{
+      setState(() {
+        carregando = true;
+        this.dados = itens;
+
+      });
+
+    }
+
+  }
+
+
+  mensagem(){
+    var alert = new AlertDialog(
+      title: new Text('Listar Dados'),
+      content: new SingleChildScrollView(
+        child: new ListBody(
+          children: <Widget>[
+            new Text("Produto não encontrado"),
+          ],
+        ),
+      ),
+      actions: <Widget>[
+        new TextButton(
+          child: new Text('Ok'),
+          onPressed: () {
+            Navigator.of(context).pushReplacement(MaterialPageRoute(
+                builder: (BuildContext context) => Tabs("","","")));
+          },
+        ),
+      ],
+    );
+    showDialog(context: context, child: alert);
+
+
+
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -37,104 +94,93 @@ class _CardProdutosState extends State<CardProdutos> {
       child: Stack(
         children: <Widget>[
           Container(
-            height: 230.0,
-            width: 340.0,
-            child: Image(
-              image: AssetImage(
-                  widget.imagem
+            height: widget._altura,
+            width: widget._altura,
+            child: !carregando
+          ? new LinearProgressIndicator()
+            : new ListView.builder(
+         itemCount: this.dados != null ? this.dados.length : 0,
+          itemBuilder: (context, i){
+          final item = this.dados[i];
+
+
+          return new Container(
+              margin: EdgeInsets.only(bottom: 7.0),
+              child:Stack(
+                children: <Widget>[
+                  Container(
+                    child:Image.network(item['imagem']),
+
+                  ),
+                      Positioned(
+                        left: 10.0,
+                        bottom: 0.0,
+                        width: 339.0,
+                        height: 48.0,
+                        child: Container(
+                          decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                  begin: Alignment.bottomCenter,
+                                  end: Alignment.topCenter,
+                                  colors: [Colors.black54, Colors.black12])),
+                        ),
+                      ),
+                      Positioned(
+                        left: 10.0,
+                        bottom: 10.0,
+                        right: 10.0,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  item['nome'],
+                                  style: TextStyle(
+                                      fontSize: 18.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
+                                ),
+
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: <Widget>[
+                                Text(
+                                  item['valor'],
+                                  style: TextStyle(
+                                      fontSize: 18.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.orangeAccent),
+                                ),
+                                Text("(Dúzia)",
+                                    style: TextStyle(color: Color(0xFFFFFFFF)))
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+
+                ],
               ),
-              fit: BoxFit.cover,
-            ),
-          ),
-          Positioned(
-            left: 10.0,
-            bottom: 0.0,
-            width: 339.0,
-            height: 48.0,
-            child: Container(
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      begin: Alignment.bottomCenter,
-                      end: Alignment.topCenter,
-                      colors: [Colors.black54, Colors.black12])),
-            ),
-          ),
-          Positioned(
-            left: 10.0,
-            bottom: 10.0,
-            right: 10.0,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      widget.nome,
-                      style: TextStyle(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Icon(
-                          Icons.star,
-                          color: Theme.of(context).primaryColorLight,
-                          size: 16.0,
-                        ),
-                        Icon(
-                          Icons.star,
-                          color: Theme.of(context).primaryColor,
-                          size: 16.0,
-                        ),
-                        Icon(
-                          Icons.star,
-                          color: Theme.of(context).primaryColor,
-                          size: 16.0,
-                        ),
-                        Icon(
-                          Icons.star,
-                          color: Theme.of(context).primaryColor,
-                          size: 16.0,
-                        ),
-                        Icon(
-                          Icons.star,
-                          color: Theme.of(context).primaryColor,
-                          size: 16.0,
-                        ),
-                        SizedBox(
-                          width: 10.0,
-                        ),
-                        Text(
-                          "(" + widget.avaliacoes.toString() + " Avaliação)",
-                          style: TextStyle(color: Colors.grey),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: <Widget>[
-                    Text(
-                      widget.valor.toString(),
-                      style: TextStyle(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFFFFFFFF)),
-                    ),
-                    Text("(Dúzia)",
-                        style: TextStyle(color: Color(0xFFFFFFFF)))
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+
+
+          );
+
+          }
+
+    ),
+
+
+
+    )
+    ],
+    ),
     );
   }
 
 }
+
 
