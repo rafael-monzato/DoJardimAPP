@@ -1,6 +1,7 @@
 //Onde vai ter os cards da tela incicial
 
 import 'dart:convert';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:tcc_faculdadeimpacta/src/pages/produtosPage.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -21,10 +22,12 @@ class _AreaCategoriaState extends State<AreaCategoria> {
   var dados;
 
   listarDados() async{
-    var url = "";
-    var response = await http.get(url);
-    var map = json.decode(response.body);
-    var itens = map["result"];
+      var storage = FlutterSecureStorage();
+     final response = await http.get(Uri.parse("https://app-flower-impacta.herokuapp.com/api/categorias"),
+           headers: {"Accept": "application/json","Authorization":"Bearer "+storage.read(key: "token").toString()});
+
+    final map = json.decode(response.body);
+    final itens = map["data"];
 
 
     setState(() {

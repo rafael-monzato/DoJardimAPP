@@ -82,6 +82,9 @@ class _LoginPageState extends State<LoginPage> {
       var obj = json.decode(response.body);
       storage.write(key: "token", value: obj["token"]);
       storage.write(key: "name", value: obj["user"]["name"]);
+      storage.write(key: "telefone", value: obj["user"]["telefone"]);
+      storage.write(key: "cpf", value: obj["user"]["cpf"]);
+
 
       var msg = obj["message"];
       if(msg == "Dados incorretos!"){

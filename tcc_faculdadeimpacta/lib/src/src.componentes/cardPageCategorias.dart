@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:tcc_faculdadeimpacta/src/pages/TelaInicial.dart';
 import 'package:tcc_faculdadeimpacta/src/pages/produtosPage.dart';
 import 'package:tcc_faculdadeimpacta/src/abas/tabs1.dart';
@@ -34,14 +35,13 @@ class _CardPageCategoriasState extends State<CardPageCategorias> {
   }
 
   _listarDados() async{
+      var storage = FlutterSecureStorage();
+    final response = await http.get(Uri.parse("https://app-flower-impacta.herokuapp.com/api/categorias"),
+           headers: {"Accept": "application/json","Authorization":"Bearer "+storage.read(key: "token").toString()});
 
-
-    final url =
-        "";
-    final response = await http.get(url);
     final map = json.decode(response.body);
-    final itens = map["result"];
-    if(map["result"] == 'Dados não encontrados!'){
+    final itens = map["data"];
+    if(map["data"] == []){
       mensagem();
     }else{
       setState(() {
