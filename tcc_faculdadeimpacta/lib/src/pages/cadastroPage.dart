@@ -1,6 +1,7 @@
 import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:tcc_faculdadeimpacta/src/src.componentes/botao.dart';
 import 'package:tcc_faculdadeimpacta/src/pages/loginPage.dart';
 import 'package:tcc_faculdadeimpacta/src/abas/tabs1.dart';
@@ -306,10 +307,12 @@ class _cadastroPageState extends State<cadastroPage> {
   }
 
   excluirUsuario(id){
-    http.get(
-        Uri.encodeFull(
-            ""),
-        headers: {"Accept": "application/json"});
+          var storage = FlutterSecureStorage();
+
+    http.post(
+        Uri.parse(
+            "https://app-flower-impacta.herokuapp.com/api/logout"),
+        headers: {"Accept": "application/json","Authorization":"Bearer "+storage.});
     Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => Tabs("", "", "")
     ));
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:tcc_faculdadeimpacta/src/src.componentes/botao.dart';
 import 'package:tcc_faculdadeimpacta/src/pages/cadastroPage.dart';
 import 'package:tcc_faculdadeimpacta/src/abas/tabs1.dart';
@@ -72,13 +73,16 @@ class _LoginPageState extends State<LoginPage> {
 
     //FUNCAO DO LOGIN
     Future<String> Login(String usuario, String senha) async {
-      var response = await http.get(
-          Uri.encodeFull(
-              ""),
-          headers: {"Accept": "application/json"});
+      var storage = FlutterSecureStorage();
+      var response = await http.post(
+          Uri.parse("https://app-flower-impacta.herokuapp.com/api/login"),
+          headers: {"Accept": "application/json"},body: { "email":usuario, "password":senha});
 
 
       var obj = json.decode(response.body);
+      storage.write(key: "token", value: obj["token"]);
+      storage.write(key: "name", value: obj["user"]["name"]);
+
       var msg = obj["message"];
       if(msg == "Dados incorretos!"){
         MensagemDadosIncorretos();
