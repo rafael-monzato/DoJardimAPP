@@ -230,22 +230,16 @@ class _cadastroPageState extends State<cadastroPage> {
   //método para recuperar os dados do usuário logado
   recuperarDados() async{
 
-    var response = await http.get(
-        Uri.encodeFull(
-            ""),
-        headers: {"Accept": "application/json"});
-    final map = json.decode(response.body);
-    final itens = map["result"];
+      var storage = FlutterSecureStorage();
+
 
     setState(() {
 
-      this.dados = itens;
-
-      nome = dados[0]["nome"];
-      cpf = dados[0]["cpf"];
-      telefone = dados[0]["telefone"];
-      usuario = dados[0]["usuario"];
-      senha = dados[0]["senha"];
+      nome =   storage.read(key: "");
+      cpf = storage.read(key: "cpf");
+      telefone = storage.read(key: "telefone");
+      usuario = storage.read(key: "name");
+      senha = storage.read(key: "name");
 
 
       nometxt = new TextEditingController(text: nome);
@@ -262,14 +256,14 @@ class _cadastroPageState extends State<cadastroPage> {
   //método para inserir na api
   void _inserir() async{
     var url = "";
-    var response = await http.post(url, body:{
-      "nome" : nometxt.text,
+    var response = await http.post(Uri.parse("https://app-flower-impacta.herokuapp.com/api/cadastrar"), body:{
+      "name" : nometxt.text,
       "email" : emailtxt.text,
       "cpf" : cpftxt.text,
       "telefone" : telefonetxt.text,
-      "senha" : senhatxt.text,
-      "id" : widget._id,
-
+      "password" : senhatxt.text,
+      "password_confirmation" : senhatxt.text,
+      "nivel":"Cliente"
     });
 
     final map = json.decode(response.body);

@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:tcc_faculdadeimpacta/src/abas/tabs1.dart';
 
@@ -37,14 +38,14 @@ class _CardProdutoState extends State<CardProduto> {
 
   _listarDados() async{
     buscar = widget._nomebusca;
+      var storage = FlutterSecureStorage();
 
     var response = await http.get(
-        Uri.encodeFull(
-            ""),
-        headers: {"Accept": "application/json"});
+        Uri.parse("https://app-flower-impacta.herokuapp.com/api/produtos"),
+        headers: {"Accept": "application/json","Authorization":"Bearer "+storage.read(key: "token").toString()});
     final map = json.decode(response.body);
-    final itens = map["result"];
-    if(map["result"] == 'Dados não encontrados!'){
+    final itens = map["data"];
+    if(map["data"] == []){
       mensagem();
     }else{
       setState(() {
